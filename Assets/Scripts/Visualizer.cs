@@ -9,6 +9,7 @@ public class Visualizer : MonoBehaviour
     List<Vector3> positions = new List<Vector3>();
 
     public RoadHelper roadHelper;
+    public StructureHelper structureHelper;
 
     private int length = 8;
     private float angle = 90;
@@ -90,6 +91,7 @@ public class Visualizer : MonoBehaviour
             }
         }
         roadHelper.FixRoad();
+        structureHelper.PlaceStructuresAroundRoad(roadHelper.GetRoadPositions());
     }
 
 }
