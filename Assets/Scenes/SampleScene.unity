@@ -430,12 +430,12 @@ MonoBehaviour:
   buildingTypes:
   - prefabs:
     - {fileID: 3962440082643158057, guid: 5689e4726bc2a8a48bcc36605fba918e, type: 3}
-    sizeRequired: 3
+    sizeRequired: 2
     quantity: 1
     quantityAlreadyPlaced: 0
   - prefabs:
     - {fileID: 5418577439970722738, guid: ec611ae9f609edc4cad3995c701a4072, type: 3}
-    sizeRequired: 3
+    sizeRequired: 2
     quantity: 1
     quantityAlreadyPlaced: 0
   - prefabs:
@@ -450,6 +450,10 @@ MonoBehaviour:
     sizeRequired: 1
     quantity: -1
     quantityAlreadyPlaced: 0
+  naturePrefabs:
+  - {fileID: 7328506887492032017, guid: 88c874f6544584d42a89652cb20ac23b, type: 3}
+  randomNaturePlacement: 1
+  randomNaturePlacementThreshold: 0.3
 --- !u!4 &1217173744
 Transform:
   m_ObjectHideFlags: 0
