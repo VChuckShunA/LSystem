@@ -67,7 +67,6 @@ public class LSystemScript : MonoBehaviour{
                         currentString[(c + 3) % currentString.Length] == 'F' && currentString[(c + 4) % currentString.Length] == 'X')
                     {
                          treeSegment = Instantiate(leaf);
-                        Debug.Log("LEAF!");
                     }
                     else{
                          treeSegment = Instantiate(branch);

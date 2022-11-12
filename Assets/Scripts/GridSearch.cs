@@ -33,6 +33,7 @@ public class GridSearch
         {
             Point current = GetClosestVertex(positionsTocheck, priorityDictionary);
             positionsTocheck.Remove(current);
+
             if (current.Equals(endPosition))
             {
                 path = GeneratePath(parentsDictionary, current);

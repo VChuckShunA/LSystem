@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class PlacementManager : MonoBehaviour
 {
+    public int width, height;
     Grid placementGrid;
+
+    private void Start()
+    {
+        placementGrid = new Grid(width, height);
+    }
+
     internal List<Vector3> GetPathBetween(Vector3 startPosition, Vector3 endPosition)
     {
         var resultPath = GridSearch.AStarSearch(placementGrid, new Point((int)startPosition.x, (int)startPosition.z), new Point((int)endPosition.x, (int)endPosition.z));
+        //var resultPath = GridSearch.AStarSearch(placementGrid, new Point(startPosition.x, startPosition.z), new Point(endPosition.x, endPosition.z));
         List<Vector3> path = new List<Vector3>();
         foreach (Point point in resultPath)
         {
