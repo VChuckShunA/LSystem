@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2992175050650138185}
   m_Layer: 0
   m_Name: Branch
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,8 +83,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.065582275
-        value: 0.099414825
+        time: 0.09921646
+        value: 0.011692047
         inSlope: 0
         outSlope: 0
         tangentMode: 0

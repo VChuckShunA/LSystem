@@ -17,4 +17,5 @@ MonoBehaviour:
   - '[+F][-F]'
   - '[+F]F[-F]'
   - '[-F]F[+F]'
+  - '[F-[[X]+X]+F[+FX]-X]'
   randomResult: 1

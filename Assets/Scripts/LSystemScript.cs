@@ -11,10 +11,11 @@ public class TransformInfo{
 
 
 public class LSystemScript : MonoBehaviour{
-    [SerializeField] private float iterations = 4;
+    [SerializeField] private float iterations;
     [SerializeField] private GameObject branch;
-    [SerializeField] private float length=10;
-    [SerializeField] private float angle = 30;
+    [SerializeField] private GameObject leaf;
+    [SerializeField] private float length;
+    [SerializeField] private float angle ;
     private const string axiom = "X";
 
     private Stack<TransformInfo> transformStack;
@@ -22,9 +23,12 @@ public class LSystemScript : MonoBehaviour{
     private string currentString = string.Empty;
     void Start(){
         transformStack = new Stack<TransformInfo>();
-
+        angle = UnityEngine.Random.Range(10, 60);
+        iterations = UnityEngine.Random.Range(3, 5);
+        length = UnityEngine.Random.Range(0.01f, 0.1f);
         rules = new Dictionary<char, string> {
             { 'X',"[F-[[X]+X]+F[+FX]-X]" },
+             //{ 'X', "[FX[+F[-FX]FX][-F-FXFX]]" }, //This generates interesting shrubs
             { 'F',"FF"}
         };
 
@@ -50,14 +54,24 @@ public class LSystemScript : MonoBehaviour{
         
 
 
-        foreach (char c in currentString) { 
-            switch(c){
+        //foreach (char c in currentString)
+        for (int c = 0; c < currentString.Length; c++){ 
+            switch(currentString[c])
+            {
                 case 'F':
                     //Draw a straight line
                     Vector3 initialPosition = transform.position;
                     transform.Translate(Vector3.up * length);
-
-                    GameObject treeSegment = Instantiate(branch);
+                    GameObject treeSegment;
+                    if (currentString[(c + 1) % currentString.Length] == 'X' || 
+                        currentString[(c + 3) % currentString.Length] == 'F' && currentString[(c + 4) % currentString.Length] == 'X')
+                    {
+                         treeSegment = Instantiate(leaf);
+                        Debug.Log("LEAF!");
+                    }
+                    else{
+                         treeSegment = Instantiate(branch);
+                    }
                     treeSegment.GetComponent<LineRenderer>().SetPosition(0, initialPosition);
                     treeSegment.GetComponent<LineRenderer>().SetPosition(1, transform.position);
                     break;

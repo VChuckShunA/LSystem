@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0323d29e1df22614c88155da3c143fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 4
+  iterations: 1
   branch: {fileID: 1119779684221965766, guid: c56b2037b07c6b04986aa56c6d885426, type: 3}
+  leaf: {fileID: 3169875217738718185, guid: b8f8165aa8fe3524590834acc0c51c4f, type: 3}
   length: 0.1
   angle: 30

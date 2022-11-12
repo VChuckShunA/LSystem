@@ -127,6 +127,28 @@ public class StructureHelper : MonoBehaviour
             return freeSpace;
         }
 
-
+    public void Reset()
+    {
+        foreach (var item in structuresDictionary.Values)
+        {
+            Destroy(item);
+        }
+        structuresDictionary.Clear();
+        foreach (var item in natureDictionary.Values)
+        {
+            Destroy(item);
+        }
+        natureDictionary.Clear();
+        foreach (var buildingType in buildingTypes)
+        {
+            buildingType.Reset();
+        }
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Tree");
+        foreach (var tree in gos)
+        {
+            Destroy(tree);
+        }
+    }
 
 }
