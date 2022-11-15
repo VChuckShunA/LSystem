@@ -22,6 +22,8 @@ public class TreeGenerator : MonoBehaviour
     [SerializeField] private GameObject branch;
     [SerializeField] private GameObject leaf;
 
+    [SerializeField] private Mesh treeMesh;
+
     private const string axiom = "X";
 
     private Dictionary<char, string> rules;
@@ -157,6 +159,7 @@ public class TreeGenerator : MonoBehaviour
                     transform.Translate(Vector3.up * 2 * length);
 
                     GameObject fLine = currentString[(i + 1) % currentString.Length] == 'X' || currentString[(i + 3) % currentString.Length] == 'F' && currentString[(i + 4) % currentString.Length] == 'X' ? Instantiate(leaf) : Instantiate(branch);
+                    fLine.GetComponent<LineRenderer>().BakeMesh(treeMesh, true);
                     fLine.transform.SetParent(Tree.transform);
                     fLine.GetComponent<LineRenderer>().SetPosition(0, initialPosition);
                     fLine.GetComponent<LineRenderer>().SetPosition(1, transform.position);

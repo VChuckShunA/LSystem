@@ -16,6 +16,8 @@ public class LSystemScript : MonoBehaviour{
     [SerializeField] private GameObject leaf;
     [SerializeField] private float length;
     [SerializeField] private float angle ;
+    [SerializeField] private float rotationAngle;
+    [SerializeField] private Mesh treeMesh;
     private const string axiom = "X";
 
     private Stack<TransformInfo> transformStack;
@@ -25,6 +27,7 @@ public class LSystemScript : MonoBehaviour{
         transformStack = new Stack<TransformInfo>();
         angle = UnityEngine.Random.Range(10, 60);
         iterations = UnityEngine.Random.Range(3, 5);
+        rotationAngle = UnityEngine.Random.Range(0, 90);
         length = UnityEngine.Random.Range(0.01f, 0.1f);
         rules = new Dictionary<char, string> {
             { 'X',"[F-[[X]+X]+F[+FX]-X]" },
@@ -70,6 +73,7 @@ public class LSystemScript : MonoBehaviour{
                     }
                     else{
                          treeSegment = Instantiate(branch);
+                        transform.Rotate(0, rotationAngle, 0);
                     }
                     treeSegment.GetComponent<LineRenderer>().SetPosition(0, initialPosition);
                     treeSegment.GetComponent<LineRenderer>().SetPosition(1, transform.position);
