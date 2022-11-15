@@ -149,9 +149,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 371335214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26327412cc5baef4bb31b40d995e8b38, type: 3}
+  m_Script: {fileID: 11500000, guid: 2579291c11f2f7145bcb17a548190b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 20
+  height: 20
 --- !u!4 &371335216
 Transform:
   m_ObjectHideFlags: 0
@@ -374,6 +376,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -447,6 +450,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c417e12d9d5a63c46bccbe1c063f2dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCamera: {fileID: 963194227}
+  cameraMovementSpeed: 5
 --- !u!1 &1107021900
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +658,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1292904112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6120ad93c1875e14cae1afae7e3ec466, type: 3}
+  m_Script: {fileID: 11500000, guid: 22264e8b01cee4d4da98f4c8bb1aaa6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   placementManager: {fileID: 371335215}
@@ -1271,7 +1288,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1292904113}
-        m_TargetAssemblyTypeName: AiDirector, Assembly-CSharp
+        m_TargetAssemblyTypeName: SimpleCity.AI.AiDirector, Assembly-CSharp
         m_MethodName: SpawnAllAagents
         m_Mode: 1
         m_Arguments:

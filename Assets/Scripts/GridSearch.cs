@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,7 @@ using UnityEngine;
 /// <summary>
 /// Source https://github.com/lordjesus/Packt-Introduction-to-graph-algorithms-for-game-developers
 /// </summary>
-public class GridSearch
-{
+public class GridSearch {
 
     public struct SearchResult
     {
@@ -33,7 +32,6 @@ public class GridSearch
         {
             Point current = GetClosestVertex(positionsTocheck, priorityDictionary);
             positionsTocheck.Remove(current);
-
             if (current.Equals(endPosition))
             {
                 path = GeneratePath(parentsDictionary, current);

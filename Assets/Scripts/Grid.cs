@@ -1,11 +1,9 @@
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Source https://github.com/lordjesus/Packt-Introduction-to-graph-algorithms-for-game-developers
 /// </summary>
-/// 
 public class Point
 {
     public int X { get; set; }
@@ -67,6 +65,7 @@ public class Grid
 
     private List<Point> _roadList = new List<Point>();
     private List<Point> _specialStructure = new List<Point>();
+    private List<Point> _houseStructure = new List<Point>();
 
     public Grid(int width, int height)
     {
@@ -88,17 +87,13 @@ public class Grid
             {
                 _roadList.Add(new Point(i, j));
             }
-            else
-            {
-                _roadList.Remove(new Point(i, j));
-            }
             if (value == CellType.SpecialStructure)
             {
                 _specialStructure.Add(new Point(i, j));
             }
-            else
+            if (value == CellType.Structure)
             {
-                _specialStructure.Remove(new Point(i, j));
+                _houseStructure.Add(new Point(i, j));
             }
             _grid[i, j] = value;
         }
@@ -115,14 +110,40 @@ public class Grid
 
     public Point GetRandomRoadPoint()
     {
-        System.Random rand = new System.Random();
-        return _roadList[rand.Next(0, _roadList.Count - 1)];
+        if (_roadList.Count == 0)
+        {
+            return null;
+        }
+        return _roadList[UnityEngine.Random.Range(0, _roadList.Count)];
     }
 
     public Point GetRandomSpecialStructurePoint()
     {
-        System.Random rand = new System.Random();
-        return _roadList[rand.Next(0, _roadList.Count - 1)];
+        if (_specialStructure.Count == 0)
+        {
+            return null;
+        }
+        return _specialStructure[UnityEngine.Random.Range(0, _specialStructure.Count)];
+    }
+
+    public Point GetRandomHouseStructurePoint()
+    {
+        if (_houseStructure.Count == 0)
+        {
+            return null;
+        }
+        return _houseStructure[UnityEngine.Random.Range(0, _houseStructure.Count)];
+    }
+
+    public List<Point> GetAllHouses()
+    {
+        
+        return _houseStructure;
+    }
+
+    internal List<Point> GetAllSpecialStructure()
+    {
+        return _specialStructure;
     }
 
     public List<Point> GetAdjacentCells(Point cell, bool isAgent)
@@ -162,7 +183,6 @@ public class Grid
         List<Point> adjacentCells = GetAllAdjacentCells(x, y);
         for (int i = adjacentCells.Count - 1; i >= 0; i--)
         {
-            Debug.Log(_grid[adjacentCells[i].X, adjacentCells[i].Y]);
             if (IsCellWakable(_grid[adjacentCells[i].X, adjacentCells[i].Y], isAgent) == false)
             {
                 adjacentCells.RemoveAt(i);
