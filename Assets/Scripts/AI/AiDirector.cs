@@ -13,27 +13,27 @@ namespace SimpleCity.AI
 
         public void SpawnAllAagents()
         {
-            Debug.Log("All Houeses: "+placementManager.GetAllHouses());
+           /* Debug.Log("All Houeses: "+placementManager.GetAllHouses());
             Debug.Log("Random Special Structure: "+placementManager.GetRandomSpecialStrucutre());
-            //Debug.Log("All Special Structures: "+placementManager.GetAllSpecialStructures());
-           // Debug.Log("Random House Structure: "+placementManager.GetRandomHouseStructure());
+            Debug.Log("All Special Structures: "+placementManager.GetAllSpecialStructures());
+            Debug.Log("Random House Structure: "+placementManager.GetRandomHouseStructure());*/
             foreach (var house in placementManager.GetAllHouses())
             {
                 Debug.Log("For loop"+house);
                 TrySpawningAnAgent(house, placementManager.GetRandomSpecialStrucutre());
-            }/*
+            }
             foreach (var specialStructure in placementManager.GetAllSpecialStructures())
             {
                 TrySpawningAnAgent(specialStructure, placementManager.GetRandomHouseStructure());
-            }*/
+            }
         }
 
         private void TrySpawningAnAgent(Point startStructure, Point endStructure)
         {
             if(startStructure != null && endStructure != null)
             {
-                var startPosition =startStructure; //= ((INeedingRoad)startStructure).RoadPosition;
-                var endPosition = endStructure; //((INeedingRoad)endStructure).RoadPosition;
+                var startPosition =startStructure;//.RoadPosition; //= ((INeedingRoad)startStructure).RoadPosition;
+                var endPosition = endStructure;//.RoadPosition; //((INeedingRoad)endStructure).RoadPosition;
                 var agent = Instantiate(GetRandomPedestrian(), new Vector3(startPosition.X,0,startPosition.Y), Quaternion.identity);
                 var path = placementManager.GetPathBetween(new Vector3Int(startPosition.X,0,startPosition.Y), new Vector3Int(endPosition.X,0,endPosition.Y));
                 if(path.Count > 0)

@@ -11,7 +11,7 @@ public class Point
 {
     public int X { get; set; }
     public int Y { get; set; }
-
+    public Vector3Int RoadPosition { get; set; }
     public Point(int x, int y)
     {
         this.X = x;
@@ -188,13 +188,13 @@ public class Grid
     {
         List<Point> adjacentCells = GetAllAdjacentCells(x, y);
         
-        Debug.Log("Adjacent Cells"+ adjacentCells.Count);//3
-        Debug.Log("X"+x); //-1
-        Debug.Log("Y"+y);//1
+        Debug.Log("Adjacent Cells"+ adjacentCells.Count);
+        Debug.Log("X"+x); 
+        Debug.Log("Y"+y);
         for (int i = adjacentCells.Count - 1; i >= 0; i--)
         {
-            Debug.Log(adjacentCells[i].X); //-1
-            Debug.Log(adjacentCells[i].Y);//2
+            Debug.Log(adjacentCells[i].X); 
+            Debug.Log(adjacentCells[i].Y);
             if (IsCellWakable(_grid[adjacentCells[i].X, adjacentCells[i].Y], isAgent) == false)
             {
                 adjacentCells.RemoveAt(i);

@@ -47,7 +47,7 @@ public class Visualizer : MonoBehaviour
     private void VisualizeSequence(string sequence)
     {
         Stack<AgentParameters> savePoints = new Stack<AgentParameters>();
-        var currentPosition = Vector3.zero;
+        var currentPosition = new Vector3(500, 0, 500);//Vector3.zero+500;
 
         Vector3 direction = Vector3.forward;
         Vector3 tempPosition = Vector3.zero;

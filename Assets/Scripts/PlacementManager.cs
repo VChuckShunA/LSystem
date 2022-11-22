@@ -15,7 +15,6 @@ public class PlacementManager : MonoBehaviour
     private void Start()
     {
         placementGrid = new Grid(width, height);
-        //Debug.Log(placementGrid.GetAllHouses());
     }
 
     internal CellType[] GetNeighbourTypesFor(Vector3Int position)
@@ -202,10 +201,11 @@ public class PlacementManager : MonoBehaviour
         return point;
     }
 
-    public StructureModel GetRandomHouseStructure()
+    public Point GetRandomHouseStructure()
     {
         var point = placementGrid.GetRandomHouseStructurePoint();
-        return GetStructureAt(point);
+       // return GetStructureAt(point);
+       return point;
     }
 
     public List<Point> GetAllHouses()
@@ -213,9 +213,9 @@ public class PlacementManager : MonoBehaviour
         List<StructureModel> returnList = new List<StructureModel>();
         List<Point> housePositions = placementGrid.GetAllHouses();
         Debug.Log(housePositions);
-       /* Vector3Int i = new Vector3Int(0, 0, 0);
+        Vector3Int i = new Vector3Int(0, 0, 0);
 
-        foreach (Point point in housePositions)
+        /*foreach (Point point in housePositions)
         {
             i = new Vector3Int(point.X, 0, point.Y);
             Vector3Int number = new Vector3Int(-1, 0, 1);
@@ -223,21 +223,22 @@ public class PlacementManager : MonoBehaviour
             //Debug.Log(housePositions[i]);
             returnList.Add(structureDictionary[new Vector3Int(point.X, 0, point.Y)]);
             Debug.Log("check");
-        }*/
-
+        }
+*/
         return housePositions;
     }
 
-    internal List<StructureModel> GetAllSpecialStructures()
+    internal List<Point> GetAllSpecialStructures()
     {
         List<StructureModel> returnList = new List<StructureModel>();
         var housePositions = placementGrid.GetAllSpecialStructure();
-        foreach (var point in housePositions)
+       /* foreach (var point in housePositions)
         {
             returnList.Add(structureDictionary[new Vector3Int(point.X, 0, point.Y)]);
-        }
+        }*/
 
-        return returnList;
+        //return returnList;
+        return housePositions;
     }
 
 
