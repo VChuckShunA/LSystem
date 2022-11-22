@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7157108102984789876}
+  - component: {fileID: -1639941161814815855}
+  - component: {fileID: -4350539121773035565}
   m_Layer: 0
   m_Name: MainHallBuilding
   m_TagString: Special
@@ -32,6 +34,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1639941161814815855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3962440082643158057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c652eb35dd98b4468008fef8b75ce30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellStr: SpecialStructure
+  pM_GO: {fileID: 0}
+  placementManager: {fileID: 0}
+--- !u!114 &-4350539121773035565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3962440082643158057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f96971e97bf9249b794f063fa03fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8948609718774036279
 PrefabInstance:
   m_ObjectHideFlags: 0

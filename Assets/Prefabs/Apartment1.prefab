@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120633176759195071}
   - component: {fileID: 4323580062847617385}
+  - component: {fileID: -2248162049462785113}
   m_Layer: 0
   m_Name: Apartment1
   m_TagString: Special
@@ -45,6 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f96971e97bf9249b794f063fa03fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2248162049462785113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507707691550815495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c652eb35dd98b4468008fef8b75ce30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellStr: Structure
+  pM_GO: {fileID: 0}
+  placementManager: {fileID: 0}
 --- !u!1001 &2699977152675389641
 PrefabInstance:
   m_ObjectHideFlags: 0

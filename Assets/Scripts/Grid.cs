@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using CodeMonkey.Utils;
 
 /// <summary>
 /// Source https://github.com/lordjesus/Packt-Introduction-to-graph-algorithms-for-game-developers
@@ -57,15 +60,15 @@ public enum CellType
 
 public class Grid
 {
-    private CellType[,] _grid;
+    public CellType[,] _grid;
     private int _width;
     public int Width { get { return _width; } }
     private int _height;
     public int Height { get { return _height; } }
 
-    private List<Point> _roadList = new List<Point>();
-    private List<Point> _specialStructure = new List<Point>();
-    private List<Point> _houseStructure = new List<Point>();
+    public List<Point> _roadList = new List<Point>();
+    public List<Point> _specialStructure = new List<Point>();
+    public List<Point> _houseStructure = new List<Point>();
 
     public Grid(int width, int height)
     {
@@ -73,6 +76,8 @@ public class Grid
         _height = height;
         _grid = new CellType[width, height];
     }
+
+  
 
     // Adding index operator to our Grid class so that we can use grid[][] to access specific cell from our grid. 
     public CellType this[int i, int j]
@@ -101,6 +106,7 @@ public class Grid
 
     public static bool IsCellWakable(CellType cellType, bool aiAgent = false)
     {
+        Debug.Log("boo");
         if (aiAgent)
         {
             return cellType == CellType.Road;
@@ -181,8 +187,14 @@ public class Grid
     public List<Point> GetWakableAdjacentCells(int x, int y, bool isAgent)
     {
         List<Point> adjacentCells = GetAllAdjacentCells(x, y);
+        
+        Debug.Log("Adjacent Cells"+ adjacentCells.Count);//3
+        Debug.Log("X"+x); //-1
+        Debug.Log("Y"+y);//1
         for (int i = adjacentCells.Count - 1; i >= 0; i--)
         {
+            Debug.Log(adjacentCells[i].X); //-1
+            Debug.Log(adjacentCells[i].Y);//2
             if (IsCellWakable(_grid[adjacentCells[i].X, adjacentCells[i].Y], isAgent) == false)
             {
                 adjacentCells.RemoveAt(i);

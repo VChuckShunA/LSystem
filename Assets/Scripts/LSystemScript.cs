@@ -18,6 +18,9 @@ public class LSystemScript : MonoBehaviour{
     [SerializeField] private float angle ;
     [SerializeField] private float rotationAngle;
     [SerializeField] private Mesh treeMesh;
+    [SerializeField] private Camera camera;
+
+    public TubeRenderer tubeRenderer;
     private const string axiom = "X";
 
     private Stack<TransformInfo> transformStack;
@@ -36,9 +39,17 @@ public class LSystemScript : MonoBehaviour{
         };
 
         Generate();
+        //ReplaceWithMesh(); //This slows the whole thing down for some reason
         
     }
-
+    private void ReplaceWithMesh(){
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Tree");
+        foreach (GameObject g in gos) {
+            Quaternion gq = g.transform.rotation;
+            //Instantiate(treeMesh, g.transform.position, gq);
+            g.GetComponent<LineRenderer>().BakeMesh(treeMesh,Camera.main,true);
+        }
+    }
     private void Generate() {
         currentString = axiom;
         StringBuilder sb = new StringBuilder();
@@ -77,6 +88,7 @@ public class LSystemScript : MonoBehaviour{
                     }
                     treeSegment.GetComponent<LineRenderer>().SetPosition(0, initialPosition);
                     treeSegment.GetComponent<LineRenderer>().SetPosition(1, transform.position);
+                    //treeSegment.GetComponent<LineRenderer>().BakeMesh(treeMesh);
                     break;
 
                 case 'X':

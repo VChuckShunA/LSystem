@@ -9,11 +9,13 @@ public class PlacementManager : MonoBehaviour
     Grid placementGrid;
 
     private Dictionary<Vector3Int, StructureModel> temporaryRoadobjects = new Dictionary<Vector3Int, StructureModel>();
+
     private Dictionary<Vector3Int, StructureModel> structureDictionary = new Dictionary<Vector3Int, StructureModel>();
 
     private void Start()
     {
         placementGrid = new Grid(width, height);
+        //Debug.Log(placementGrid.GetAllHouses());
     }
 
     internal CellType[] GetNeighbourTypesFor(Vector3Int position)
@@ -27,10 +29,12 @@ public class PlacementManager : MonoBehaviour
         {
             return true;
         }
+
         return false;
     }
 
-    internal void PlaceObjectOnTheMap(Vector3Int position, GameObject structurePrefab, CellType type, int width = 1, int height = 1)
+    internal void PlaceObjectOnTheMap(Vector3Int position, GameObject structurePrefab, CellType type, int width = 1,
+        int height = 1)
     {
         StructureModel structure = CreateANewStructureModel(position, structurePrefab, type);
 
@@ -51,7 +55,6 @@ public class PlacementManager : MonoBehaviour
                 DestroyNatureAt(newPosition);
             }
         }
-
     }
 
     private Vector3Int? GetNearestRoad(Vector3Int position, int width, int height)
@@ -68,12 +71,14 @@ public class PlacementManager : MonoBehaviour
                 }
             }
         }
+
         return null;
     }
 
     private void DestroyNatureAt(Vector3Int position)
     {
-        RaycastHit[] hits = Physics.BoxCastAll(position + new Vector3(0, 0.5f, 0), new Vector3(0.5f, 0.5f, 0.5f), transform.up, Quaternion.identity, 1f, 1 << LayerMask.NameToLayer("Nature"));
+        RaycastHit[] hits = Physics.BoxCastAll(position + new Vector3(0, 0.5f, 0), new Vector3(0.5f, 0.5f, 0.5f),
+            transform.up, Quaternion.identity, 1f, 1 << LayerMask.NameToLayer("Nature"));
         foreach (var item in hits)
         {
             Destroy(item.collider.gameObject);
@@ -105,27 +110,51 @@ public class PlacementManager : MonoBehaviour
         {
             neighbours.Add(new Vector3Int(point.X, 0, point.Y));
         }
+
         return neighbours;
     }
 
-    private StructureModel CreateANewStructureModel(Vector3Int position, GameObject structurePrefab, CellType type)
+    public StructureModel CreateANewStructureModel(Vector3Int position, GameObject structurePrefab, CellType type)
     {
         GameObject structure = new GameObject(type.ToString());
         structure.transform.SetParent(transform);
         structure.transform.localPosition = position;
         var structureModel = structure.AddComponent<StructureModel>();
         structureModel.CreateModel(structurePrefab);
+        // Debug.Log(position);
+        // Debug.Log(type.ToString());
         return structureModel;
+    }
+
+    public Grid AddToGrid(Vector3Int position, string type)
+    {
+        //CellType parsed_enum = (CellType)System.Enum.Parse(typeof(CellType), type);
+        switch (type)
+        {
+            case "Structure":
+                placementGrid._houseStructure.Add(new Point((int)position.x, (int)position.z));
+                break;
+            case "SpecialStructure":
+                placementGrid._specialStructure.Add(new Point((int)position.x, (int)position.z));
+                break;
+            case "Road":
+                placementGrid._roadList.Add(new Point((int)position.x, (int)position.z));
+                break;
+        }
+
+        return placementGrid;
     }
 
     internal List<Vector3Int> GetPathBetween(Vector3Int startPosition, Vector3Int endPosition)
     {
-        var resultPath = GridSearch.AStarSearch(placementGrid, new Point(startPosition.x, startPosition.z), new Point(endPosition.x, endPosition.z));
+        var resultPath = GridSearch.AStarSearch(placementGrid, new Point(startPosition.x, startPosition.z),
+            new Point(endPosition.x, endPosition.z));
         List<Vector3Int> path = new List<Vector3Int>();
         foreach (Point point in resultPath)
         {
             path.Add(new Vector3Int(point.X, 0, point.Y));
         }
+
         return path;
     }
 
@@ -137,6 +166,7 @@ public class PlacementManager : MonoBehaviour
             placementGrid[position.x, position.z] = CellType.Empty;
             Destroy(structure.gameObject);
         }
+
         temporaryRoadobjects.Clear();
     }
 
@@ -147,6 +177,7 @@ public class PlacementManager : MonoBehaviour
             structureDictionary.Add(structure.Key, structure.Value);
             DestroyNatureAt(structure.Key);
         }
+
         temporaryRoadobjects.Clear();
     }
 
@@ -164,10 +195,11 @@ public class PlacementManager : MonoBehaviour
         return GetStructureAt(point);
     }
 
-    public StructureModel GetRandomSpecialStrucutre()
+    public Point GetRandomSpecialStrucutre()
     {
         var point = placementGrid.GetRandomSpecialStructurePoint();
-        return GetStructureAt(point);
+        //return GetStructureAt(point);
+        return point;
     }
 
     public StructureModel GetRandomHouseStructure()
@@ -176,16 +208,24 @@ public class PlacementManager : MonoBehaviour
         return GetStructureAt(point);
     }
 
-    public List<StructureModel> GetAllHouses()
+    public List<Point> GetAllHouses()
     {
         List<StructureModel> returnList = new List<StructureModel>();
-        var housePositions = placementGrid.GetAllHouses();
+        List<Point> housePositions = placementGrid.GetAllHouses();
         Debug.Log(housePositions);
-        foreach (var point in housePositions)
+       /* Vector3Int i = new Vector3Int(0, 0, 0);
+
+        foreach (Point point in housePositions)
         {
+            i = new Vector3Int(point.X, 0, point.Y);
+            Vector3Int number = new Vector3Int(-1, 0, 1);
+
+            //Debug.Log(housePositions[i]);
             returnList.Add(structureDictionary[new Vector3Int(point.X, 0, point.Y)]);
-        }
-        return returnList;
+            Debug.Log("check");
+        }*/
+
+        return housePositions;
     }
 
     internal List<StructureModel> GetAllSpecialStructures()
@@ -196,6 +236,7 @@ public class PlacementManager : MonoBehaviour
         {
             returnList.Add(structureDictionary[new Vector3Int(point.X, 0, point.Y)]);
         }
+
         return returnList;
     }
 
@@ -206,6 +247,7 @@ public class PlacementManager : MonoBehaviour
         {
             return structureDictionary[new Vector3Int(point.X, 0, point.Y)];
         }
+
         return null;
     }
 
@@ -215,6 +257,7 @@ public class PlacementManager : MonoBehaviour
         {
             return structureDictionary[position];
         }
+
         return null;
     }
 }
