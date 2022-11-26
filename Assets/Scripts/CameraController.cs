@@ -35,7 +35,8 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         if (followTransform != null) {
-            transform.position = followTransform.position;
+            transform.position = new Vector3(followTransform.transform.position.x,-49,followTransform.transform.position.z+52);
+            //transform.LookAt(followTransform);
         }
         else {
             HandleMouseInput();

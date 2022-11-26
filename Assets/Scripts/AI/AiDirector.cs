@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace SimpleCity.AI
-{
     public class AiDirector : MonoBehaviour
     {
         public PlacementManager placementManager;
@@ -19,12 +17,13 @@ namespace SimpleCity.AI
             Debug.Log("Random House Structure: "+placementManager.GetRandomHouseStructure());*/
             foreach (var house in placementManager.GetAllHouses())
             {
-                Debug.Log("For loop"+house);
                 TrySpawningAnAgent(house, placementManager.GetRandomSpecialStrucutre());
+                //Debug.Log("house "+house);
             }
             foreach (var specialStructure in placementManager.GetAllSpecialStructures())
             {
                 TrySpawningAnAgent(specialStructure, placementManager.GetRandomHouseStructure());
+                //Debug.Log("special "+specialStructure);
             }
         }
 
@@ -32,16 +31,19 @@ namespace SimpleCity.AI
         {
             if(startStructure != null && endStructure != null)
             {
-                var startPosition =startStructure;//.RoadPosition; //= ((INeedingRoad)startStructure).RoadPosition;
-                var endPosition = endStructure;//.RoadPosition; //((INeedingRoad)endStructure).RoadPosition;
-                var agent = Instantiate(GetRandomPedestrian(), new Vector3(startPosition.X,0,startPosition.Y), Quaternion.identity);
-                var path = placementManager.GetPathBetween(new Vector3Int(startPosition.X,0,startPosition.Y), new Vector3Int(endPosition.X,0,endPosition.Y));
-                if(path.Count > 0)
-                {
-                    path.Reverse();
-                    var aiAgent = agent.GetComponent<AiAgent>();
+                var startPosition = placementManager.GetNearestRoad(new Vector3Int(startStructure.X,0,startStructure.Y),1,1).Value; //= ((INeedingRoad)startStructure).RoadPosition;
+                var endPosition = placementManager.GetNearestRoad(new Vector3Int(endStructure.X,0,endStructure.Y),1,1).Value; //((INeedingRoad)endStructure).RoadPosition;
+                
+                var agent = Instantiate(GetRandomPedestrian(), new Vector3Int(startPosition.x,0,startPosition.z), Quaternion.identity);
+                //Debug.Log(startPosition);
+                var path = placementManager.GetPathBetween(new Vector3Int(startPosition.x,0,startPosition.z), new Vector3Int(endPosition.x,0,endPosition.z));
+               
+                
+                 {
+                     path.Reverse();
+                     var aiAgent = agent.GetComponent<AiAgent>();
                     aiAgent.Initialize(new List<Vector3>(path.Select(x => (Vector3)x).ToList()));
-                }
+                 }
             }
         }
 
@@ -50,5 +52,3 @@ namespace SimpleCity.AI
             return pedestrianPrefabs[UnityEngine.Random.Range(0, pedestrianPrefabs.Length)];
         }
     }
-}
-

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CodeMonkey.Utils;
 
 /// <summary>
 /// Source https://github.com/lordjesus/Packt-Introduction-to-graph-algorithms-for-game-developers
@@ -11,7 +10,6 @@ public class Point
 {
     public int X { get; set; }
     public int Y { get; set; }
-    public Vector3Int RoadPosition { get; set; }
     public Point(int x, int y)
     {
         this.X = x;
@@ -106,7 +104,6 @@ public class Grid
 
     public static bool IsCellWakable(CellType cellType, bool aiAgent = false)
     {
-        Debug.Log("boo");
         if (aiAgent)
         {
             return cellType == CellType.Road;
@@ -188,13 +185,9 @@ public class Grid
     {
         List<Point> adjacentCells = GetAllAdjacentCells(x, y);
         
-        Debug.Log("Adjacent Cells"+ adjacentCells.Count);
-        Debug.Log("X"+x); 
-        Debug.Log("Y"+y);
+        
         for (int i = adjacentCells.Count - 1; i >= 0; i--)
         {
-            Debug.Log(adjacentCells[i].X); 
-            Debug.Log(adjacentCells[i].Y);
             if (IsCellWakable(_grid[adjacentCells[i].X, adjacentCells[i].Y], isAgent) == false)
             {
                 adjacentCells.RemoveAt(i);
@@ -205,13 +198,16 @@ public class Grid
 
     public List<Point> GetAdjacentCellsOfType(int x, int y, CellType type)
     {
+        
         List<Point> adjacentCells = GetAllAdjacentCells(x, y);
-        for (int i = adjacentCells.Count - 1; i >= 0; i--)
+        
+        for (int i = adjacentCells.Count-1; i >= 0; i--)
         {
             if (_grid[adjacentCells[i].X, adjacentCells[i].Y] != type)
             {
                 adjacentCells.RemoveAt(i);
             }
+            
         }
         return adjacentCells;
     }

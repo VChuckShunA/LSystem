@@ -16,7 +16,6 @@ public class TubeRenderer : MonoBehaviour
     private Mesh _mesh;
     private MeshFilter _meshFilter;
     private MeshRenderer _meshRenderer;
-    public LSystemScript _lSystemScript;
 
     public Material material
     {
@@ -58,7 +57,7 @@ public class TubeRenderer : MonoBehaviour
 
     void Update()
     {
-        //GenerateMesh();
+        GenerateMesh();
     }
 
     private void OnValidate()

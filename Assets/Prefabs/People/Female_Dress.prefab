@@ -1033,6 +1033,7 @@ GameObject:
   - component: {fileID: 288064152681843605}
   - component: {fileID: 1644492806328449028}
   - component: {fileID: -795971290232123484}
+  - component: {fileID: -6555173998324406898}
   m_Layer: 0
   m_Name: Female_Dress
   m_TagString: Untagged
@@ -1103,6 +1104,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a30a939acfc42f4088e3ffafa956d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &-6555173998324406898
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5928032463670676373}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5951783462812806622
 GameObject:
   m_ObjectHideFlags: 0

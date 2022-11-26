@@ -45,14 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c652eb35dd98b4468008fef8b75ce30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellName:
-  - Empty
-  - Road
-  - Structure
-  - SpecialStructure
-  - None
   cellStr: Road
+  pM_GO: {fileID: 0}
   placementManager: {fileID: 0}
+  parsed_enum: 1
 --- !u!1001 &825733353222862949
 PrefabInstance:
   m_ObjectHideFlags: 0

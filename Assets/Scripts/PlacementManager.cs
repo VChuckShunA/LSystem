@@ -56,7 +56,7 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-    private Vector3Int? GetNearestRoad(Vector3Int position, int width, int height)
+    public Vector3Int? GetNearestRoad(Vector3Int position, int width, int height)
     {
         for (int x = 0; x < width; x++)
         {
@@ -66,11 +66,11 @@ public class PlacementManager : MonoBehaviour
                 var roads = GetNeighboursOfTypeFor(newPosition, CellType.Road);
                 if (roads.Count > 0)
                 {
+                    Debug.Log("Found roads");
                     return roads[0];
                 }
             }
         }
-
         return null;
     }
 
@@ -104,12 +104,14 @@ public class PlacementManager : MonoBehaviour
     internal List<Vector3Int> GetNeighboursOfTypeFor(Vector3Int position, CellType type)
     {
         var neighbourVertices = placementGrid.GetAdjacentCellsOfType(position.x, position.z, type);
+        Debug.Log("NEIGHBOUR VECTOR"+neighbourVertices);
         List<Vector3Int> neighbours = new List<Vector3Int>();
+        
         foreach (var point in neighbourVertices)
         {
             neighbours.Add(new Vector3Int(point.X, 0, point.Y));
         }
-
+       //Debug.Log(neighbours);
         return neighbours;
     }
 
@@ -127,21 +129,29 @@ public class PlacementManager : MonoBehaviour
 
     public Grid AddToGrid(Vector3Int position, string type)
     {
-        //CellType parsed_enum = (CellType)System.Enum.Parse(typeof(CellType), type);
+        CellType parsed_enum = (CellType)System.Enum.Parse(typeof(CellType), type);
         switch (type)
         {
             case "Structure":
-                placementGrid._houseStructure.Add(new Point((int)position.x, (int)position.z));
+                //placementGrid._houseStructure.Add(new Point((int)position.x, (int)position.z));
+                placementGrid[position.x, position.z] = parsed_enum;
                 break;
             case "SpecialStructure":
-                placementGrid._specialStructure.Add(new Point((int)position.x, (int)position.z));
+                //placementGrid._specialStructure.Add(new Point((int)position.x, (int)position.z));
+                placementGrid[position.x, position.z] = parsed_enum;
                 break;
             case "Road":
-                placementGrid._roadList.Add(new Point((int)position.x, (int)position.z));
+                //placementGrid._roadList.Add(new Point((int)position.x, (int)position.z));
+                placementGrid[position.x, position.z] = parsed_enum;
                 break;
         }
-
+        
         return placementGrid;
+    }
+
+    public void AddRoadPosition()
+    {
+        
     }
 
     internal List<Vector3Int> GetPathBetween(Vector3Int startPosition, Vector3Int endPosition)
@@ -212,7 +222,6 @@ public class PlacementManager : MonoBehaviour
     {
         List<StructureModel> returnList = new List<StructureModel>();
         List<Point> housePositions = placementGrid.GetAllHouses();
-        Debug.Log(housePositions);
         Vector3Int i = new Vector3Int(0, 0, 0);
 
         /*foreach (Point point in housePositions)

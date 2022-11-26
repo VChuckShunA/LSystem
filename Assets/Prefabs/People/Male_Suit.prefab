@@ -1478,6 +1478,7 @@ GameObject:
   - component: {fileID: -8163899555034260737}
   - component: {fileID: 2379426070683192667}
   - component: {fileID: 3889451832844961180}
+  - component: {fileID: 6636546799447024427}
   m_Layer: 0
   m_Name: Male_Suit
   m_TagString: Untagged
@@ -1548,6 +1549,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a30a939acfc42f4088e3ffafa956d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &6636546799447024427
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964402343246118786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8987942369903925705
 GameObject:
   m_ObjectHideFlags: 0

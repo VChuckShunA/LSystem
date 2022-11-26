@@ -49,6 +49,7 @@ MonoBehaviour:
   cellStr: SpecialStructure
   pM_GO: {fileID: 0}
   placementManager: {fileID: 0}
+  parsed_enum: 3
 --- !u!114 &-8420980684915885011
 MonoBehaviour:
   m_ObjectHideFlags: 0
